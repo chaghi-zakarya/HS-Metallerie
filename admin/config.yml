@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: chaghi-zakarya/HS-Metallerie
+  branch: main
+
+media_folder: "static/uploads"
+public_folder: "/static/uploads"
+
+collections:
+  - name: "publications"
+    label: "Publications"
+    folder: "_publications"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Catégorie", name: "category", widget: "select", options: ["Portail / Clôture", "Escalier métallique", "Garde-corps", "Structure métallique", "Ferronnerie décorative", "Réparation / Soudure", "Autre"] }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Date", name: "date", widget: "datetime" }
