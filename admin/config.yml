@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: chaghi-zakarya/HS-Metallerie
+  name: git-gateway
   branch: main
 
 media_folder: "static/uploads"
