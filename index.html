@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HS Metallerie — Soudure · Assemblage · Ferronnerie — Versailles</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +29,7 @@
   .hero h1 span { color: #c0392b; }
   .hero p { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.75; margin-bottom: 2rem; max-width: 500px; }
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary { background: #c0392b; color: #fff; padding: 13px 30px; border-radius: 4px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; letter-spacing: .5px; }
+  .btn-primary { background: #c0392b; color: #fff; padding: 13px 30px; border-radius: 4px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
   .btn-outline { background: transparent; color: #fff; padding: 13px 30px; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; border: 1.5px solid rgba(255,255,255,0.3); }
 
   .stats { background: #c0392b; display: flex; justify-content: center; }
@@ -57,26 +58,44 @@
 
   .products { background: #fff; }
   .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.25rem; }
-  .product-card { border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+  .product-card { border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
   .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-  .product-img { height: 120px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #c0392b; position: relative; overflow: hidden; }
-  .product-img::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(192,57,43,0.05) 0, rgba(192,57,43,0.05) 1px, transparent 1px, transparent 20px); }
+  .product-img { height: 120px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #c0392b; }
   .product-info { padding: 1rem; }
   .product-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px; }
   .product-desc { font-size: 12px; color: #777; line-height: 1.5; margin-bottom: .75rem; }
-  .product-link { font-size: 12px; color: #c0392b; font-weight: 700; }
+  .product-link { font-size: 12px; color: #c0392b; font-weight: 700; cursor: pointer; }
+
+  /* PUBLICATIONS */
+  .publications { background: #f5f5f5; }
+  .pub-filters { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .pub-filter { background: #fff; border: 1px solid #ddd; color: #555; padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all .2s; }
+  .pub-filter.active, .pub-filter:hover { background: #c0392b; border-color: #c0392b; color: #fff; }
+  .pub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .pub-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: transform .2s, box-shadow .2s; }
+  .pub-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); }
+  .pub-img { width: 100%; height: 200px; object-fit: cover; background: #1a1a1a; display: flex; align-items: center; justify-content: center; color: #c0392b; font-size: 36px; }
+  .pub-img img { width: 100%; height: 100%; object-fit: cover; }
+  .pub-body { padding: 1rem; }
+  .pub-cat { font-size: 11px; font-weight: 700; color: #c0392b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: .4rem; }
+  .pub-title { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: .5rem; }
+  .pub-desc { font-size: 13px; color: #666; line-height: 1.5; }
+  .pub-date { font-size: 11px; color: #aaa; margin-top: .75rem; }
+  .pub-empty { text-align: center; padding: 3rem; color: #aaa; grid-column: 1/-1; }
+  .pub-empty i { font-size: 48px; display: block; margin-bottom: 1rem; color: #ddd; }
+  .loading-pubs { text-align: center; padding: 2rem; color: #999; font-size: 14px; }
 
   .services { background: #1a1a1a; }
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
-  .svc-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; transition: border-color .2s, background .2s; cursor: pointer; }
+  .svc-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; transition: border-color .2s, background .2s; }
   .svc-card:hover { background: rgba(192,57,43,0.1); border-color: rgba(192,57,43,0.5); }
   .svc-icon { font-size: 26px; color: #c0392b; margin-bottom: .75rem; }
   .svc-title { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: .4rem; }
   .svc-desc { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.6; }
 
-  .testimonials { background: #f5f5f5; }
+  .testimonials { background: #fff; }
   .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
-  .testi-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 1.5rem; }
+  .testi-card { background: #f5f5f5; border-radius: 8px; padding: 1.5rem; }
   .stars { color: #c0392b; font-size: 15px; margin-bottom: .75rem; }
   .testi-text { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
   .testi-author { display: flex; align-items: center; gap: .75rem; }
@@ -84,22 +103,20 @@
   .testi-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
   .testi-role { font-size: 11px; color: #999; }
 
-  .contact { background: #fff; display: flex; gap: 3rem; align-items: flex-start; }
+  .contact { background: #f5f5f5; display: flex; gap: 3rem; align-items: flex-start; }
   .contact-form { flex: 1; }
   .contact-info { flex: 1; }
   .form-row { display: flex; gap: 1rem; }
   .form-group { flex: 1; margin-bottom: 1rem; }
   .form-group label { display: block; font-size: 12px; font-weight: 600; color: #444; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
-  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; font-family: inherit; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; font-family: inherit; background: #fff; }
   .form-group input:focus, .form-group textarea:focus { border-color: #c0392b; }
   .form-group textarea { height: 100px; resize: vertical; }
-  .submit-btn { background: #c0392b; color: #fff; padding: 13px 32px; border-radius: 4px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; width: 100%; letter-spacing: .5px; }
-  .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 8px; }
+  .submit-btn { background: #c0392b; color: #fff; padding: 13px 32px; border-radius: 4px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; width: 100%; }
+  .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 1rem; background: #fff; border-radius: 8px; }
   .contact-icon { width: 42px; height: 42px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; color: #c0392b; }
-  .contact-label { font-size: 11px; color: #999; margin-bottom: 2px; text-transform: uppercase; letter-spacing: .5px; }
+  .contact-label { font-size: 11px; color: #999; margin-bottom: 2px; text-transform: uppercase; }
   .contact-value { font-size: 14px; font-weight: 700; color: #1a1a1a; }
-  .contact-map { margin-top: 1.25rem; background: #1a1a1a; border-radius: 8px; height: 140px; display: flex; align-items: center; justify-content: center; gap: .75rem; }
-  .contact-map span { color: rgba(255,255,255,0.5); font-size: 13px; }
 
   footer { background: #111; color: rgba(255,255,255,0.55); padding: 3rem; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2rem; }
@@ -113,21 +130,18 @@
   .footer-col ul li a:hover { color: #c0392b; }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 12px; }
   .social-links { display: flex; gap: .6rem; margin-top: 1rem; }
-  .social-btn { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); font-size: 14px; cursor: pointer; transition: background .2s; }
+  .social-btn { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); font-size: 14px; cursor: pointer; }
   .social-btn:hover { background: #c0392b; color: #fff; }
 
   @media (max-width: 768px) {
-    nav { padding: 0 1rem; }
     .nav-links { display: none; }
     .hero { padding: 3rem 1.5rem; }
     .hero h1 { font-size: 28px; }
-    .about { flex-direction: column; padding: 2rem 1.5rem; }
-    .about-visual { min-height: 180px; }
+    .about, .contact { flex-direction: column; padding: 2rem 1.5rem; }
     .advantages { grid-template-columns: 1fr; }
-    .contact { flex-direction: column; padding: 2rem 1.5rem; }
     .form-row { flex-direction: column; }
     section { padding: 2.5rem 1.5rem; }
-    .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: .5rem; }
     .stats { flex-wrap: wrap; }
     .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
@@ -136,24 +150,19 @@
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <nav>
-  <div class="logo">
-    <div class="logo-icon">HS</div>
-    HS <span>Metallerie</span>
-  </div>
+  <div class="logo"><div class="logo-icon">HS</div>HS <span>Metallerie</span></div>
   <ul class="nav-links">
     <li><a href="#accueil">Accueil</a></li>
     <li><a href="#prestations">Prestations</a></li>
     <li><a href="#apropos">À propos</a></li>
+    <li><a href="#publications">Réalisations</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#temoignages">Réalisations</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander un devis</button>
 </nav>
 
-<!-- HERO -->
 <div class="hero" id="accueil">
   <div class="hero-bg"></div>
   <div class="hero-glow"></div>
@@ -162,13 +171,12 @@
     <h1>L'acier façonné<br>avec <span>précision</span><br>et expertise</h1>
     <p>HS Metallerie vous propose des solutions en métallerie sur mesure : portails, gardes-corps, structures métalliques, escaliers et bien plus. Qualité artisanale, délais respectés.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('prestations').scrollIntoView({behavior:'smooth'})">Voir nos prestations</button>
+      <button class="btn-primary" onclick="document.getElementById('publications').scrollIntoView({behavior:'smooth'})">Voir nos réalisations</button>
       <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander un devis</button>
     </div>
   </div>
 </div>
 
-<!-- STATS -->
 <div class="stats">
   <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Ans d'expérience</div></div>
   <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Projets réalisés</div></div>
@@ -176,7 +184,6 @@
   <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Sur mesure</div></div>
 </div>
 
-<!-- À PROPOS -->
 <section class="about" id="apropos">
   <div class="about-text">
     <div class="section-tag">À propos</div>
@@ -184,154 +191,74 @@
     <div class="divider"></div>
     <p class="section-sub">HS Metallerie est une entreprise spécialisée en soudure, assemblage et ferronnerie basée à Versailles. Nous intervenons chez les particuliers et les professionnels pour tous travaux métalliques, du simple portail à la structure complexe.</p>
     <div class="advantages">
-      <div class="adv-card">
-        <div class="adv-icon"><i class="ti ti-flame" aria-hidden="true"></i></div>
-        <div class="adv-title">Soudure professionnelle</div>
-        <div class="adv-desc">MIG, TIG, à l'arc — toutes techniques maîtrisées sur acier, inox et aluminium.</div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><i class="ti ti-tools" aria-hidden="true"></i></div>
-        <div class="adv-title">Fabrication sur mesure</div>
-        <div class="adv-desc">Chaque pièce est conçue et fabriquée selon vos plans et dimensions exactes.</div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
-        <div class="adv-title">Qualité garantie</div>
-        <div class="adv-desc">Matériaux certifiés, finitions soignées et travaux conformes aux normes.</div>
-      </div>
-      <div class="adv-card">
-        <div class="adv-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
-        <div class="adv-title">Intervention rapide</div>
-        <div class="adv-desc">Basés à Versailles, nous intervenons dans tout le département des Yvelines.</div>
-      </div>
+      <div class="adv-card"><div class="adv-icon"><i class="ti ti-flame"></i></div><div class="adv-title">Soudure professionnelle</div><div class="adv-desc">MIG, TIG, à l'arc — toutes techniques maîtrisées sur acier, inox et aluminium.</div></div>
+      <div class="adv-card"><div class="adv-icon"><i class="ti ti-tools"></i></div><div class="adv-title">Fabrication sur mesure</div><div class="adv-desc">Chaque pièce est conçue et fabriquée selon vos plans et dimensions exactes.</div></div>
+      <div class="adv-card"><div class="adv-icon"><i class="ti ti-shield-check"></i></div><div class="adv-title">Qualité garantie</div><div class="adv-desc">Matériaux certifiés, finitions soignées et travaux conformes aux normes.</div></div>
+      <div class="adv-card"><div class="adv-icon"><i class="ti ti-map-pin"></i></div><div class="adv-title">Intervention rapide</div><div class="adv-desc">Basés à Versailles, nous intervenons dans tout le département des Yvelines.</div></div>
     </div>
   </div>
   <div class="about-visual">
-    <div class="about-visual-icon"><i class="ti ti-building-factory-2" aria-hidden="true"></i></div>
+    <div class="about-visual-icon"><i class="ti ti-building-factory-2"></i></div>
     <p><strong>HS Metallerie</strong>Soudure · Assemblage · Ferronnerie<br><br>25 rue du Maréchal Foch<br>78000 Versailles</p>
   </div>
 </section>
 
-<!-- PRESTATIONS -->
 <section class="products" id="prestations">
   <div class="section-tag">Nos prestations</div>
   <h2 class="section-title">Ce que nous fabriquons</h2>
   <div class="divider"></div>
   <div class="products-grid">
-    <div class="product-card">
-      <div class="product-img"><i class="ti ti-door" aria-hidden="true"></i></div>
-      <div class="product-info">
-        <div class="product-name">Portails & Clôtures</div>
-        <div class="product-desc">Portails battants, coulissants, clôtures en fer forgé ou acier sur mesure.</div>
-        <div class="product-link">Demander un devis →</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"><i class="ti ti-stairs" aria-hidden="true"></i></div>
-      <div class="product-info">
-        <div class="product-name">Escaliers métalliques</div>
-        <div class="product-desc">Escaliers droits, hélicoïdaux, avec limon central ou crémaillères.</div>
-        <div class="product-link">Demander un devis →</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"><i class="ti ti-fence" aria-hidden="true"></i></div>
-      <div class="product-info">
-        <div class="product-name">Gardes-corps</div>
-        <div class="product-desc">Garde-corps intérieur et extérieur, terrasse, balcon, conformes aux normes.</div>
-        <div class="product-link">Demander un devis →</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"><i class="ti ti-building" aria-hidden="true"></i></div>
-      <div class="product-info">
-        <div class="product-name">Structures métalliques</div>
-        <div class="product-desc">Charpentes, mezzanines, marquises et structures portantes.</div>
-        <div class="product-link">Demander un devis →</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"><i class="ti ti-hammer" aria-hidden="true"></i></div>
-      <div class="product-info">
-        <div class="product-name">Ferronnerie décorative</div>
-        <div class="product-desc">Rampes, grilles, décors en fer forgé travaillé à la main.</div>
-        <div class="product-link">Demander un devis →</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"><i class="ti ti-settings" aria-hidden="true"></i></div>
-      <div class="product-info">
-        <div class="product-name">Réparations & soudures</div>
-        <div class="product-desc">Réparation, renforcement et modification de toute pièce métallique.</div>
-        <div class="product-link">Demander un devis →</div>
-      </div>
-    </div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-door"></i></div><div class="product-info"><div class="product-name">Portails & Clôtures</div><div class="product-desc">Portails battants, coulissants, clôtures en fer forgé ou acier sur mesure.</div><div class="product-link">Demander un devis →</div></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-stairs"></i></div><div class="product-info"><div class="product-name">Escaliers métalliques</div><div class="product-desc">Escaliers droits, hélicoïdaux, avec limon central ou crémaillères.</div><div class="product-link">Demander un devis →</div></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-fence"></i></div><div class="product-info"><div class="product-name">Gardes-corps</div><div class="product-desc">Garde-corps intérieur et extérieur, terrasse, balcon, conformes aux normes.</div><div class="product-link">Demander un devis →</div></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-building"></i></div><div class="product-info"><div class="product-name">Structures métalliques</div><div class="product-desc">Charpentes, mezzanines, marquises et structures portantes.</div><div class="product-link">Demander un devis →</div></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-hammer"></i></div><div class="product-info"><div class="product-name">Ferronnerie décorative</div><div class="product-desc">Rampes, grilles, décors en fer forgé travaillé à la main.</div><div class="product-link">Demander un devis →</div></div></div>
+    <div class="product-card"><div class="product-img"><i class="ti ti-settings"></i></div><div class="product-info"><div class="product-name">Réparations & soudures</div><div class="product-desc">Réparation, renforcement et modification de toute pièce métallique.</div><div class="product-link">Demander un devis →</div></div></div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- PUBLICATIONS / RÉALISATIONS -->
+<section class="publications" id="publications">
+  <div class="section-tag">Réalisations</div>
+  <h2 class="section-title">Nos dernières publications</h2>
+  <div class="divider"></div>
+  <div class="pub-filters">
+    <button class="pub-filter active" onclick="filterPubs('all', this)">Tout voir</button>
+    <button class="pub-filter" onclick="filterPubs('Portail / Clôture', this)">Portails & Clôtures</button>
+    <button class="pub-filter" onclick="filterPubs('Escalier métallique', this)">Escaliers</button>
+    <button class="pub-filter" onclick="filterPubs('Garde-corps', this)">Gardes-corps</button>
+    <button class="pub-filter" onclick="filterPubs('Structure métallique', this)">Structures</button>
+    <button class="pub-filter" onclick="filterPubs('Ferronnerie décorative', this)">Ferronnerie</button>
+    <button class="pub-filter" onclick="filterPubs('Réparation / Soudure', this)">Réparations</button>
+  </div>
+  <div class="pub-grid" id="pubGrid">
+    <div class="loading-pubs">Chargement des réalisations...</div>
+  </div>
+</section>
+
 <section class="services" id="services">
   <div class="section-tag" style="color:#c0392b">Pourquoi nous choisir</div>
   <h2 class="section-title" style="color:#fff">Un service complet de A à Z</h2>
   <div class="divider"></div>
   <div class="services-grid">
-    <div class="svc-card">
-      <div class="svc-icon"><i class="ti ti-clipboard-list" aria-hidden="true"></i></div>
-      <div class="svc-title">Devis gratuit et rapide</div>
-      <div class="svc-desc">Nous vous répondons sous 24h avec un devis détaillé et sans engagement.</div>
-    </div>
-    <div class="svc-card">
-      <div class="svc-icon"><i class="ti ti-pencil-plus" aria-hidden="true"></i></div>
-      <div class="svc-title">Conception sur mesure</div>
-      <div class="svc-desc">Chaque projet est unique. Nous concevons selon vos plans ou votre idée.</div>
-    </div>
-    <div class="svc-card">
-      <div class="svc-icon"><i class="ti ti-truck" aria-hidden="true"></i></div>
-      <div class="svc-title">Livraison et pose</div>
-      <div class="svc-desc">Nous assurons la livraison et la pose de vos ouvrages métalliques.</div>
-    </div>
-    <div class="svc-card">
-      <div class="svc-icon"><i class="ti ti-headset" aria-hidden="true"></i></div>
-      <div class="svc-title">Suivi après travaux</div>
-      <div class="svc-desc">Nous restons disponibles après la pose pour tout ajustement nécessaire.</div>
-    </div>
+    <div class="svc-card"><div class="svc-icon"><i class="ti ti-clipboard-list"></i></div><div class="svc-title">Devis gratuit et rapide</div><div class="svc-desc">Nous vous répondons sous 24h avec un devis détaillé et sans engagement.</div></div>
+    <div class="svc-card"><div class="svc-icon"><i class="ti ti-pencil-plus"></i></div><div class="svc-title">Conception sur mesure</div><div class="svc-desc">Chaque projet est unique. Nous concevons selon vos plans ou votre idée.</div></div>
+    <div class="svc-card"><div class="svc-icon"><i class="ti ti-truck"></i></div><div class="svc-title">Livraison et pose</div><div class="svc-desc">Nous assurons la livraison et la pose de vos ouvrages métalliques.</div></div>
+    <div class="svc-card"><div class="svc-icon"><i class="ti ti-headset"></i></div><div class="svc-title">Suivi après travaux</div><div class="svc-desc">Nous restons disponibles après la pose pour tout ajustement nécessaire.</div></div>
   </div>
 </section>
 
-<!-- TÉMOIGNAGES -->
-<section class="testimonials" id="temoignages">
+<section class="testimonials">
   <div class="section-tag">Témoignages</div>
   <h2 class="section-title">Ce que disent nos clients</h2>
   <div class="divider"></div>
   <div class="testi-grid">
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <div class="testi-text">"Travail soigné et rapide. Mon portail a été fabriqué et posé en moins d'une semaine. Je recommande vivement HS Metallerie pour leur sérieux et leur professionnalisme."</div>
-      <div class="testi-author">
-        <div class="testi-avatar">PL</div>
-        <div><div class="testi-name">Pierre L.</div><div class="testi-role">Versailles</div></div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <div class="testi-text">"Escalier métallique sur mesure impeccable. Devis clair, délais respectés, finitions parfaites. Une équipe à l'écoute du client, je suis très satisfait."</div>
-      <div class="testi-author">
-        <div class="testi-avatar">SM</div>
-        <div><div class="testi-name">Sophie M.</div><div class="testi-role">Le Chesnay</div></div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <div class="testi-text">"Réparation de ma grille réalisée en urgence, intervention le lendemain de mon appel. Prix honnête et travail de qualité. Bravo !"</div>
-      <div class="testi-author">
-        <div class="testi-avatar">JD</div>
-        <div><div class="testi-name">Jean-Marc D.</div><div class="testi-role">Saint-Cyr-l'École</div></div>
-      </div>
-    </div>
+    <div class="testi-card"><div class="stars">★★★★★</div><div class="testi-text">"Travail soigné et rapide. Mon portail a été fabriqué et posé en moins d'une semaine. Je recommande vivement HS Metallerie."</div><div class="testi-author"><div class="testi-avatar">PL</div><div><div class="testi-name">Pierre L.</div><div class="testi-role">Versailles</div></div></div></div>
+    <div class="testi-card"><div class="stars">★★★★★</div><div class="testi-text">"Escalier métallique sur mesure impeccable. Devis clair, délais respectés, finitions parfaites. Très satisfait."</div><div class="testi-author"><div class="testi-avatar">SM</div><div><div class="testi-name">Sophie M.</div><div class="testi-role">Le Chesnay</div></div></div></div>
+    <div class="testi-card"><div class="stars">★★★★★</div><div class="testi-text">"Réparation de ma grille en urgence, intervention le lendemain. Prix honnête et travail de qualité. Bravo !"</div><div class="testi-author"><div class="testi-avatar">JD</div><div><div class="testi-name">Jean-Marc D.</div><div class="testi-role">Saint-Cyr-l'École</div></div></div></div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-form">
     <div class="section-tag">Contact</div>
@@ -344,48 +271,22 @@
     <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 XX XX XX XX"></div>
     <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
     <div class="form-group"><label>Type de prestation</label>
-      <select>
-        <option>-- Choisissez --</option>
-        <option>Portail / Clôture</option>
-        <option>Escalier métallique</option>
-        <option>Garde-corps</option>
-        <option>Structure métallique</option>
-        <option>Ferronnerie décorative</option>
-        <option>Réparation / Soudure</option>
-        <option>Autre</option>
-      </select>
+      <select><option>-- Choisissez --</option><option>Portail / Clôture</option><option>Escalier métallique</option><option>Garde-corps</option><option>Structure métallique</option><option>Ferronnerie décorative</option><option>Réparation / Soudure</option><option>Autre</option></select>
     </div>
-    <div class="form-group"><label>Description du projet</label><textarea placeholder="Décrivez votre projet ou votre besoin..."></textarea></div>
+    <div class="form-group"><label>Description du projet</label><textarea placeholder="Décrivez votre projet..."></textarea></div>
     <button class="submit-btn">Envoyer ma demande de devis</button>
   </div>
   <div class="contact-info">
     <div class="section-tag">Coordonnées</div>
     <h2 class="section-title">Contactez-nous</h2>
     <div class="divider"></div>
-    <div class="contact-detail">
-      <div class="contact-icon"><i class="ti ti-phone" aria-hidden="true"></i></div>
-      <div><div class="contact-label">Téléphone</div><div class="contact-value">06.05.24.22.08</div></div>
-    </div>
-    <div class="contact-detail">
-      <div class="contact-icon"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i></div>
-      <div><div class="contact-label">WhatsApp</div><div class="contact-value">06.05.24.22.08</div></div>
-    </div>
-    <div class="contact-detail">
-      <div class="contact-icon"><i class="ti ti-mail" aria-hidden="true"></i></div>
-      <div><div class="contact-label">Email</div><div class="contact-value">hsmetallerie@gmail.com</div></div>
-    </div>
-    <div class="contact-detail">
-      <div class="contact-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
-      <div><div class="contact-label">Adresse</div><div class="contact-value">25 rue du Maréchal Foch<br>78000 Versailles</div></div>
-    </div>
-    <div class="contact-map">
-      <i class="ti ti-map-2" style="font-size:24px;color:#c0392b" aria-hidden="true"></i>
-      <span>Versailles · Yvelines · Île-de-France</span>
-    </div>
+    <div class="contact-detail"><div class="contact-icon"><i class="ti ti-phone"></i></div><div><div class="contact-label">Téléphone</div><div class="contact-value">06.05.24.22.08</div></div></div>
+    <div class="contact-detail"><div class="contact-icon"><i class="ti ti-brand-whatsapp"></i></div><div><div class="contact-label">WhatsApp</div><div class="contact-value">06.05.24.22.08</div></div></div>
+    <div class="contact-detail"><div class="contact-icon"><i class="ti ti-mail"></i></div><div><div class="contact-label">Email</div><div class="contact-value">hsmetallerie@gmail.com</div></div></div>
+    <div class="contact-detail"><div class="contact-icon"><i class="ti ti-map-pin"></i></div><div><div class="contact-label">Adresse</div><div class="contact-value">25 rue du Maréchal Foch, 78000 Versailles</div></div></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -394,18 +295,18 @@
       <div style="font-size:13px;margin-bottom:.5rem;">📞 06.05.24.22.08</div>
       <div style="font-size:13px;">✉️ hsmetallerie@gmail.com</div>
       <div class="social-links">
-        <div class="social-btn"><i class="ti ti-brand-facebook" aria-hidden="true"></i></div>
-        <div class="social-btn"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div>
-        <div class="social-btn"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i></div>
+        <div class="social-btn"><i class="ti ti-brand-facebook"></i></div>
+        <div class="social-btn"><i class="ti ti-brand-instagram"></i></div>
+        <div class="social-btn"><i class="ti ti-brand-whatsapp"></i></div>
       </div>
     </div>
     <div class="footer-col">
       <h4>Navigation</h4>
       <ul>
         <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#prestations">Nos prestations</a></li>
+        <li><a href="#prestations">Prestations</a></li>
         <li><a href="#apropos">À propos</a></li>
-        <li><a href="#temoignages">Réalisations</a></li>
+        <li><a href="#publications">Réalisations</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -427,5 +328,82 @@
   </div>
 </footer>
 
+<script>
+// Charger les publications depuis GitHub
+let allPubs = [];
+
+async function loadPublications() {
+  const grid = document.getElementById('pubGrid');
+  try {
+    const res = await fetch('https://api.github.com/repos/chaghi-zakarya/HS-Metallerie/contents/_publications');
+    if (!res.ok) throw new Error('Pas encore de publications');
+    const files = await res.json();
+    const mdFiles = files.filter(f => f.name.endsWith('.md'));
+    if (mdFiles.length === 0) throw new Error('Aucune publication');
+
+    allPubs = [];
+    for (const file of mdFiles) {
+      const r = await fetch(file.download_url);
+      const text = await r.text();
+      const pub = parseFrontmatter(text);
+      allPubs.push(pub);
+    }
+    allPubs.sort((a, b) => new Date(b.date) - new Date(a.date));
+    renderPubs(allPubs);
+  } catch (e) {
+    grid.innerHTML = `
+      <div class="pub-empty">
+        <i class="ti ti-photo-off"></i>
+        <strong style="color:#555;font-size:16px;">Aucune réalisation publiée pour l'instant</strong>
+        <p style="margin-top:.5rem;font-size:13px;">Les nouvelles réalisations apparaîtront ici automatiquement.</p>
+      </div>`;
+  }
+}
+
+function parseFrontmatter(text) {
+  const match = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  const obj = {};
+  match[1].split('\n').forEach(line => {
+    const [key, ...val] = line.split(':');
+    if (key && val.length) obj[key.trim()] = val.join(':').trim().replace(/^["']|["']$/g, '');
+  });
+  return obj;
+}
+
+function renderPubs(pubs) {
+  const grid = document.getElementById('pubGrid');
+  if (!pubs.length) {
+    grid.innerHTML = `<div class="pub-empty"><i class="ti ti-photo-off"></i><p>Aucune réalisation dans cette catégorie.</p></div>`;
+    return;
+  }
+  grid.innerHTML = pubs.map(p => `
+    <div class="pub-card">
+      <div class="pub-img">${p.image ? `<img src="${p.image}" alt="${p.title}" onerror="this.parentElement.innerHTML='<i class=\\'ti ti-photo\\'></i>'">` : '<i class="ti ti-photo"></i>'}</div>
+      <div class="pub-body">
+        <div class="pub-cat">${p.category || 'Réalisation'}</div>
+        <div class="pub-title">${p.title || ''}</div>
+        <div class="pub-desc">${p.description || ''}</div>
+        <div class="pub-date">${p.date ? new Date(p.date).toLocaleDateString('fr-FR', {day:'numeric',month:'long',year:'numeric'}) : ''}</div>
+      </div>
+    </div>`).join('');
+}
+
+function filterPubs(cat, btn) {
+  document.querySelectorAll('.pub-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = cat === 'all' ? allPubs : allPubs.filter(p => p.category === cat);
+  renderPubs(filtered);
+}
+
+// Netlify Identity
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', user => {
+    if (!user) window.netlifyIdentity.on('login', () => document.location.href = '/admin/');
+  });
+}
+
+loadPublications();
+</script>
 </body>
 </html>
